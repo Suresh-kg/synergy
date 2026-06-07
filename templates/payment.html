@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Payment - Synergy</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo-container">
+
+        <img src="{{ url_for('static',
+        filename='images/logo.png') }}">
+
+        <span>SYNERGY</span>
+
+    </div>
+
+</nav>
+
+<div class="register-container">
+
+    <h1>Complete Payment</h1>
+
+    <br>
+
+    <h3>Course: Python Programming</h3>
+
+    <h2>Fee: ₹299</h2>
+
+    <br>
+
+    <img
+    src="{{ url_for('static',
+    filename='images/qr.png') }}"
+    width="250">
+
+    <br><br>
+
+    <h3>UPI ID</h3>
+
+    <p>
+        synergy@oksbi
+    </p>
+
+    <br>
+
+    <form
+    action="/submit_payment/{{ student_id }}"
+    method="POST">
+
+        <input
+        type="text"
+        name="utr"
+        placeholder="Enter UTR / Transaction ID"
+        required>
+
+        <button type="submit">
+
+            Submit Payment Details
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Courses - Synergy</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo-container">
+
+        <img src="{{ url_for('static',
+        filename='images/logo.png') }}"
+        alt="Synergy Logo">
+
+   
+
+    </div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+
+</nav>
+
+<h1 class="page-title">
+    Our Courses
+</h1>
+
+<div class="course-container">
+
+    <div class="course-card">
+
+        <h2>Python Programming</h2>
+
+        <p>Duration: 15 Days</p>
+
+        <ul>
+            <li>Variables</li>
+            <li>Loops</li>
+            <li>Functions</li>
+            <li>Projects</li>
+        </ul>
+
+        <h3>₹299</h3>
+
+        <a href="/register" class="btn">
+            Register
+        </a>
+
+    </div>
+
+    <div class="course-card">
+
+        <h2>Data Analysis</h2>
+
+        <p>Coming Soon</p>
+
+    </div>
+
+    <div class="course-card">
+
+        <h2>SQL</h2>
+
+        <p>Coming Soon</p>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Synergy - Learn. Build. Grow.</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo-container">
+
+        <img src="{{ url_for('static',
+        filename='images/logo.png') }}"
+        alt="Synergy Logo">
+
+   
+
+    </div>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/register">Register</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/login">Admin</a></li>
+    </ul>
+
+</nav>
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Learn Python.<br>
+            Build Projects.<br>
+            Launch Your Career.
+        </h1>
+
+        <p>
+            Live Online Training • Real Projects • Certificate • Career Guidance
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/register" class="btn">
+                Enroll Now
+            </a>
+
+            <a href="/courses" class="btn btn-secondary ">
+                View Courses
+            </a>
+
+        </div>
+
+    </div>
+    
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+    <div class="circle three"></div>
+
+</section>
+
+
+<section class="features">
+
+    <div class="card">
+        <h3>Live Classes</h3>
+        <p>Interactive sessions through Google Meet.</p>
+    </div>
+
+    <div class="card">
+        <h3>Projects</h3>
+        <p>Build real-world applications.</p>
+    </div>
+
+    <div class="card">
+        <h3>Certificate</h3>
+        <p>Receive completion certificate.</p>
+    </div>
+
+</section>
+
+<section class="stats">
+
+    <div class="stat-box">
+        <h2>100+</h2>
+        <p>Students</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>20+</h2>
+        <p>Projects</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>95%</h2>
+        <p>Completion Rate</p>
+    </div>
+
+</section>
+
+<section class="cta">
+
+    <h2>Ready To Start Your Journey?</h2>
+
+    <a href="/register" class="btn">
+        Register Today
+    </a>
+
+</section>
+
+</body>
+</html>
