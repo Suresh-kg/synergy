@@ -1,9 +1,36 @@
 from os import name
-import smtplib
 from email.mime.text import MIMEText
+import sqlite3
+import smtplib
 
-EMAIL = "synergy737733838@gmail.com"
-APP_PASSWORD = "hdqe rllp ztvp vnap"
+def get_setting(key):
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT value FROM settings WHERE key=?",
+        (key,)
+    )
+
+    result = cursor.fetchone()
+
+    conn.close()
+
+    if result:
+        return result[0]
+
+    return None
+
+EMAIL = get_setting(
+    "EMAIL"
+)
+
+APP_PASSWORD = get_setting(
+    "APP_PASSWORD"
+)
+print("EMAIL:", EMAIL)
+print("APP_PASSWORD:", APP_PASSWORD)
 
 def send_welcome_email(student_name, student_email):
 

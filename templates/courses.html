@@ -1,81 +1,820 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-    <title>Courses - Synergy</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Courses | SYNERGY
+    </title>
 
     <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/main.css') }}">
+        href="{{ url_for('static', filename='css/courses.css') }}">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
 </head>
 
 <body>
 
-<nav>
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
 
-    <div class="logo-container">
+    <nav class="navbar">
 
-        <img src="{{ url_for('static',
-        filename='images/logo.png') }}"
-        alt="Synergy Logo">
+        <div class="logo">
 
-   
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="SYNERGY">
 
-    </div>
+            <span>SYNERGY</span>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/courses">Courses</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
+        </div>
 
-</nav>
+        <ul class="nav-links">
 
-<h1 class="page-title">
-    Our Courses
-</h1>
+            <li><a href="/">Home</a></li>
 
-<div class="course-container">
+            <li><a href="/courses">Courses</a></li>
 
-    <div class="course-card">
+            <li><a href="/register">Register</a></li>
 
-        <h2>Python Programming</h2>
+            <li><a href="/contact">Contact</a></li>
 
-        <p>Duration: 15 Days</p>
-
-        <ul>
-            <li>Variables</li>
-            <li>Loops</li>
-            <li>Functions</li>
-            <li>Projects</li>
         </ul>
 
-        <h3>₹299</h3>
+        <div class="nav-actions">
 
-        <a href="/register" class="btn">
-            Register
-        </a>
+            <a href="/login"
+                class="login-btn">
 
-    </div>
+                Login
 
-    <div class="course-card">
+            </a>
 
-        <h2>Data Analysis</h2>
+            <a href="/register"
+                class="join-btn">
 
-        <p>Coming Soon</p>
+                Join Now
 
-    </div>
+            </a>
 
-    <div class="course-card">
+        </div>
 
-        <h2>SQL</h2>
+    </nav>
 
-        <p>Coming Soon</p>
+    <!-- ========================= -->
+    <!-- HERO -->
+    <!-- ========================= -->
 
-    </div>
+    <section class="courses-hero">
 
-</div>
+        <div class="blob blob1"></div>
+
+        <div class="blob blob2"></div>
+
+        <div class="blob blob3"></div>
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+
+                🚀 Industry Focused Learning Programs
+
+            </div>
+
+            <h1>
+
+                Learn Skills.
+
+                <span>Build Projects.</span>
+
+                Grow Your Career.
+
+            </h1>
+
+            <p>
+
+                Practical courses designed to help students
+                gain real-world skills through live classes,
+                projects, certificates and mentorship.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/register"
+                    class="btn-primary">
+
+                    Start Learning
+
+                </a>
+
+                <a href="#courses"
+                    class="btn-secondary">
+
+                    Browse Courses
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="floating-card card1">
+
+            💻 Real Projects
+
+        </div>
+
+        <div class="floating-card card2">
+
+            🎓 Certificates
+
+        </div>
+
+        <div class="floating-card card3">
+
+            🚀 Career Support
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- HERO STATS -->
+    <!-- ========================= -->
+
+    <section class="hero-stats-section">
+
+        <div class="hero-stat">
+
+            <h2>100+</h2>
+
+            <p>Students Trained</p>
+
+        </div>
+
+        <div class="hero-stat">
+
+            <h2>20+</h2>
+
+            <p>Projects Built</p>
+
+        </div>
+
+        <div class="hero-stat">
+
+            <h2>95%</h2>
+
+            <p>Completion Rate</p>
+
+        </div>
+
+        <div class="hero-stat">
+
+            <h2>4.9★</h2>
+
+            <p>Student Rating</p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- SECTION TITLE -->
+    <!-- ========================= -->
+
+    <section class="section-header"
+        id="courses">
+
+        <span>
+            OUR PROGRAMS
+        </span>
+
+        <h2>
+
+            Explore Our Learning Paths
+
+        </h2>
+
+        <p>
+
+            Designed for beginners,
+            college students and future professionals.
+
+        </p>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FEATURED COURSE -->
+    <!-- ========================= -->
+
+    <section class="featured-course">
+
+        <div class="featured-card">
+
+            <div class="course-left">
+
+                <div class="course-tag">
+
+                    MOST POPULAR
+
+                </div>
+
+                <h2>
+
+                    🐍 Python Programming Bootcamp
+
+                </h2>
+
+                <p>
+
+                    Learn Python from beginner
+                    to project level through
+                    structured live classes,
+                    assignments and practical implementation.
+
+                </p>
+
+                <div class="price">
+
+                    ₹299
+
+                </div>
+
+            </div>
+
+            <div class="course-right">
+
+                <ul>
+
+                    <li>✓ Live Interactive Classes</li>
+
+                    <li>✓ Beginner Friendly</li>
+
+                    <li>✓ Real Projects</li>
+
+                    <li>✓ Certificate Included</li>
+
+                    <li>✓ WhatsApp Community</li>
+
+                    <li>✓ Mentor Support</li>
+
+                </ul>
+
+                <a href="/register"
+                    class="btn-primary">
+
+                    Enroll Now
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- UPCOMING COURSES -->
+    <!-- ========================= -->
+
+    <section class="upcoming-courses">
+
+        <div class="section-header">
+
+            <span>
+                COMING SOON
+            </span>
+
+            <h2>
+
+                Future Learning Tracks
+
+            </h2>
+
+        </div>
+
+        <div class="course-grid">
+
+            <div class="course-card">
+
+                <div class="coming-badge">
+
+                    Coming Soon
+
+                </div>
+
+                <h3>
+
+                    🗄 SQL Mastery
+
+                </h3>
+
+                <p>
+
+                    Learn databases,
+                    queries, joins and reporting.
+
+                </p>
+
+            </div>
+
+            <div class="course-card">
+
+                <div class="coming-badge">
+
+                    Coming Soon
+
+                </div>
+
+                <h3>
+
+                    📊 Data Analysis
+
+                </h3>
+
+                <p>
+
+                    Excel, Pandas,
+                    Visualization and Dashboards.
+
+                </p>
+
+            </div>
+
+            <div class="course-card">
+
+                <div class="coming-badge">
+
+                    Coming Soon
+
+                </div>
+
+                <h3>
+
+                    🤖 Machine Learning
+
+                </h3>
+
+                <p>
+
+                    Build predictive models
+                    and intelligent systems.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- WHY SYNERGY -->
+    <!-- ========================= -->
+
+    <section class="why-synergy">
+
+        <div class="section-header">
+
+            <span>
+                WHY CHOOSE US
+            </span>
+
+            <h2>
+
+                More Than Just A Course
+
+            </h2>
+
+            <p>
+
+                We focus on practical learning that prepares
+                students for real-world opportunities.
+
+            </p>
+
+        </div>
+
+        <div class="benefits-grid">
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    🎥
+                </div>
+
+                <h3>
+                    Live Interactive Classes
+                </h3>
+
+                <p>
+
+                    Learn directly from mentors
+                    through live online sessions.
+
+                </p>
+
+            </div>
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    💻
+                </div>
+
+                <h3>
+                    Project Based Learning
+                </h3>
+
+                <p>
+
+                    Build practical projects that
+                    strengthen your portfolio.
+
+                </p>
+
+            </div>
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    Industry Certificates
+                </h3>
+
+                <p>
+
+                    Receive professional certificates
+                    after successful completion.
+
+                </p>
+
+            </div>
+
+            <div class="benefit-card">
+
+                <div class="benefit-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Career Guidance
+                </h3>
+
+                <p>
+
+                    Resume building, interview preparation
+                    and growth support.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- LEARNING PROCESS -->
+    <!-- ========================= -->
+
+    <section class="learning-process">
+
+        <div class="section-header">
+
+            <span>
+                LEARNING PROCESS
+            </span>
+
+            <h2>
+
+                How SYNERGY Works
+
+            </h2>
+
+        </div>
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    01
+                </div>
+
+                <h3>
+                    Register
+                </h3>
+
+                <p>
+
+                    Secure your seat
+                    in the upcoming batch.
+
+                </p>
+
+            </div>
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    02
+                </div>
+
+                <h3>
+                    Learn
+                </h3>
+
+                <p>
+
+                    Attend live classes and
+                    complete assignments.
+
+                </p>
+
+            </div>
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    03
+                </div>
+
+                <h3>
+                    Build Projects
+                </h3>
+
+                <p>
+
+                    Apply your skills through
+                    real-world implementation.
+
+                </p>
+
+            </div>
+
+            <div class="process-card">
+
+                <div class="process-number">
+                    04
+                </div>
+
+                <h3>
+                    Get Certified
+                </h3>
+
+                <p>
+
+                    Earn certification and
+                    showcase your skills.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- STUDENT SUCCESS -->
+    <!-- ========================= -->
+
+    <section class="student-success">
+
+        <div class="section-header">
+
+            <span>
+                STUDENT SUCCESS
+            </span>
+
+            <h2>
+
+                Designed For Career Growth
+
+            </h2>
+
+        </div>
+
+        <div class="success-container">
+
+            <div class="success-card">
+
+                <h3>
+                    Beginner Friendly
+                </h3>
+
+                <p>
+
+                    Start from zero experience
+                    and gradually build confidence.
+
+                </p>
+
+            </div>
+
+            <div class="success-card">
+
+                <h3>
+                    Portfolio Projects
+                </h3>
+
+                <p>
+
+                    Create projects that can
+                    be showcased in interviews.
+
+                </p>
+
+            </div>
+
+            <div class="success-card">
+
+                <h3>
+                    Community Support
+                </h3>
+
+                <p>
+
+                    Learn together through
+                    our active student community.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CTA SECTION -->
+    <!-- ========================= -->
+
+    <section class="course-cta">
+
+        <div class="cta-box">
+
+            <span>
+
+                LIMITED SEATS AVAILABLE
+
+            </span>
+
+            <h2>
+
+                Ready To Start Your Tech Journey?
+
+            </h2>
+
+            <p>
+
+                Join our next Python batch and start building
+                skills that help you stand out.
+
+            </p>
+
+            <div class="cta-buttons">
+
+                <a href="/register"
+                    class="btn-primary">
+
+                    Enroll Now
+
+                </a>
+
+                <a href="/contact"
+                    class="btn-secondary">
+
+                    Contact Us
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-column">
+
+                <h3>
+
+                    SYNERGY
+
+                </h3>
+
+                <p>
+
+                    Learn • Build • Grow
+
+                </p>
+
+                <p>
+
+                    Empowering students through
+                    practical technology education.
+
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Quick Links
+
+                </h4>
+
+                <a href="/">Home</a>
+
+                <a href="/courses">Courses</a>
+
+                <a href="/register">Register</a>
+
+                <a href="/contact">Contact</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Programs
+
+                </h4>
+
+                <a href="#">Python Programming</a>
+
+                <a href="#">SQL Mastery</a>
+
+                <a href="#">Data Analysis</a>
+
+                <a href="#">Machine Learning</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Learning Features
+
+                </h4>
+
+                <p>Live Classes</p>
+
+                <p>Projects</p>
+
+                <p>Certificates</p>
+
+                <p>Career Support</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 SYNERGY. All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
 
 </body>
+
 </html>

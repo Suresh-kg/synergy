@@ -1,74 +1,821 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-<title>Student Registration</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet"
-href="{{ url_for('static', filename='css/main.css') }}">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Register | SYNERGY
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/register.css') }}">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
 </head>
 
 <body>
 
-<nav>
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
 
-    <div class="logo-container">
+    <nav class="navbar">
 
-        <img src="{{ url_for('static',
-        filename='images/logo.png') }}"
-        alt="Synergy Logo">
+        <div class="logo">
 
-   
+            <img src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="SYNERGY">
 
-    </div>
+            <span>SYNERGY</span>
 
-    <ul>
-        <li><a href="/">Register</a></li>
-        <li><a href="/courses">Courses</a></li>
-        <li><a href="/home">Home</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
+        </div>
 
-</nav>
+        <ul class="nav-links">
 
-<div class="register-container">
+            <li><a href="/">Home</a></li>
 
-    <h1>Course Registration</h1>
+            <li><a href="/courses">Courses</a></li>
 
-    <form action="/register" method="POST">
+            <li><a href="/register">Register</a></li>
 
-        <input
-        type="text"
-        name="name"
-        placeholder="Full Name"
-        required>
+            <li><a href="/contact">Contact</a></li>
 
-        <input
-        type="email"
-        name="email"
-        placeholder="Email Address"
-        required>
+        </ul>
 
-        <input
-        type="text"
-        name="phone"
-        placeholder="Phone Number"
-        required>
+        <div class="nav-actions">
 
-        <input
-        type="text"
-        name="college"
-        placeholder="College Name"
-        required>
+            <a href="/login"
+                class="login-btn">
 
-        <button type="submit">
-            Register Now
-        </button>
+                Login
 
-    </form>
+            </a>
 
-</div>
+            <a href="/register"
+                class="join-btn">
+
+                Join Now
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================= -->
+    <!-- HERO -->
+    <!-- ========================= -->
+
+    <section class="register-hero">
+
+        <div class="blob blob1"></div>
+
+        <div class="blob blob2"></div>
+
+        <div class="blob blob3"></div>
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+
+                🚀 Limited Seats Available
+
+            </div>
+
+            <h1>
+
+                Join The
+
+                <span>Python Programming</span>
+
+                Bootcamp
+
+            </h1>
+
+            <p>
+
+                Learn Python from beginner to project level,
+                build real applications, earn certificates
+                and receive career guidance.
+
+            </p>
+
+            <div class="hero-stats">
+
+                <div class="stat">
+
+                    <h3>100+</h3>
+
+                    <p>Students</p>
+
+                </div>
+
+                <div class="stat">
+
+                    <h3>20+</h3>
+
+                    <p>Projects</p>
+
+                </div>
+
+                <div class="stat">
+
+                    <h3>95%</h3>
+
+                    <p>Completion</p>
+
+                </div>
+
+                <div class="stat">
+
+                    <h3>4.9★</h3>
+
+                    <p>Rating</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- COURSE OVERVIEW -->
+    <!-- ========================= -->
+
+    <section class="course-overview">
+
+        <div class="section-header">
+
+            <span>
+                PYTHON BOOTCAMP
+            </span>
+
+            <h2>
+
+                Everything You Need To Get Started
+
+            </h2>
+
+        </div>
+
+        <div class="overview-grid">
+
+            <div class="overview-card">
+
+                <div class="icon">
+                    🎥
+                </div>
+
+                <h3>
+
+                    Live Classes
+
+                </h3>
+
+                <p>
+
+                    Interactive learning through
+                    live online sessions.
+
+                </p>
+
+            </div>
+
+            <div class="overview-card">
+
+                <div class="icon">
+                    💻
+                </div>
+
+                <h3>
+
+                    Real Projects
+
+                </h3>
+
+                <p>
+
+                    Build practical projects
+                    and strengthen your portfolio.
+
+                </p>
+
+            </div>
+
+            <div class="overview-card">
+
+                <div class="icon">
+                    🏆
+                </div>
+
+                <h3>
+
+                    Certification
+
+                </h3>
+
+                <p>
+
+                    Receive a professional
+                    completion certificate.
+
+                </p>
+
+            </div>
+
+            <div class="overview-card">
+
+                <div class="icon">
+                    🚀
+                </div>
+
+                <h3>
+
+                    Career Support
+
+                </h3>
+
+                <p>
+
+                    Resume building and
+                    interview preparation.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- REGISTER SECTION -->
+    <!-- ========================= -->
+
+    <section class="register-section">
+
+        <div class="register-wrapper">
+
+            <!-- LEFT SIDE -->
+
+            <div class="course-card">
+
+                <div class="course-tag">
+
+                    MOST POPULAR
+
+                </div>
+
+                <h2>
+
+                    🐍 Python Programming
+
+                </h2>
+
+                <p>
+
+                    Learn Python from scratch and
+                    become confident in building
+                    real-world applications.
+
+                </p>
+
+                <div class="price">
+
+                    ₹299
+
+                </div>
+
+                <ul>
+
+                    <li>✓ Live Interactive Classes</li>
+
+                    <li>✓ Beginner Friendly</li>
+
+                    <li>✓ Real Projects</li>
+
+                    <li>✓ Certificate Included</li>
+
+                    <li>✓ WhatsApp Community</li>
+
+                    <li>✓ Career Guidance</li>
+
+                </ul>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="form-card">
+
+                <h2>
+
+                    Register Now
+
+                </h2>
+
+                <p>
+
+                    Fill in your details and secure your seat.
+
+                </p>
+
+                <form action="/register_submit"
+                    method="POST">
+
+                    <input
+                        type="text"
+                        name="name"
+                        placeholder="Full Name"
+                        required>
+
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email Address"
+                        required>
+
+                    <input
+                        type="text"
+                        name="phone"
+                        placeholder="WhatsApp Number"
+                        required>
+
+                    <input
+                        type="text"
+                        name="college"
+                        placeholder="College / School Name"
+                        required>
+
+                    <select name="year"
+                        required>
+
+                        <option value="">
+                            Select Year
+                        </option>
+
+                        <option value="Higher Secondary">
+                            Higher Secondary
+                        </option>
+
+                        <option value="1st Year">
+                            1st Year
+                        </option>
+
+                        <option value="2nd Year">
+                            2nd Year
+                        </option>
+
+                    </select>
+
+                    <input
+                        type="text"
+                        value="Python Programming - ₹299"
+                        readonly>
+
+                    <button type="submit">
+
+                        Register Now
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- SUCCESS METRICS -->
+    <!-- ========================= -->
+
+    <section class="success-metrics">
+
+        <div class="section-header">
+
+            <span>
+                TRUSTED BY STUDENTS
+            </span>
+
+            <h2>
+
+                Learning That Delivers Results
+
+            </h2>
+
+            <p>
+
+                Our goal is to help students gain
+                practical skills that create real opportunities.
+
+            </p>
+
+        </div>
+
+        <div class="metrics-grid">
+
+            <div class="metric-card">
+
+                <h2>100+</h2>
+
+                <p>Students Trained</p>
+
+            </div>
+
+            <div class="metric-card">
+
+                <h2>20+</h2>
+
+                <p>Projects Completed</p>
+
+            </div>
+
+            <div class="metric-card">
+
+                <h2>95%</h2>
+
+                <p>Completion Rate</p>
+
+            </div>
+
+            <div class="metric-card">
+
+                <h2>4.9★</h2>
+
+                <p>Average Rating</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- TESTIMONIALS -->
+    <!-- ========================= -->
+
+    <section class="testimonials">
+
+        <div class="section-header">
+
+            <span>
+                STUDENT FEEDBACK
+            </span>
+
+            <h2>
+
+                What Students Say
+
+            </h2>
+
+        </div>
+
+        <div class="testimonial-grid">
+
+            <div class="testimonial-card">
+
+                <div class="stars">
+
+                    ⭐⭐⭐⭐⭐
+
+                </div>
+
+                <p>
+
+                    "The live classes and projects
+                    helped me understand Python
+                    much faster than self-learning."
+
+                </p>
+
+                <h4>
+
+                    Rahul K.
+
+                </h4>
+
+                <span>
+
+                    Computer Science Student
+
+                </span>
+
+            </div>
+
+            <div class="testimonial-card">
+
+                <div class="stars">
+
+                    ⭐⭐⭐⭐⭐
+
+                </div>
+
+                <p>
+
+                    "I built my first project and
+                    gained confidence to continue
+                    learning programming."
+
+                </p>
+
+                <h4>
+
+                    Priya S.
+
+                </h4>
+
+                <span>
+
+                    Engineering Student
+
+                </span>
+
+            </div>
+
+            <div class="testimonial-card">
+
+                <div class="stars">
+
+                    ⭐⭐⭐⭐⭐
+
+                </div>
+
+                <p>
+
+                    "The mentors were supportive
+                    and the certificate added value
+                    to my resume."
+
+                </p>
+
+                <h4>
+
+                    Arjun M.
+
+                </h4>
+
+                <span>
+
+                    BCA Student
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FAQ -->
+    <!-- ========================= -->
+
+    <section class="faq-section">
+
+        <div class="section-header">
+
+            <span>
+
+                FAQ
+
+            </span>
+
+            <h2>
+
+                Frequently Asked Questions
+
+            </h2>
+
+        </div>
+
+        <div class="faq-container">
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Do I need prior programming knowledge?
+
+                </h3>
+
+                <p>
+
+                    No. This course is designed for complete beginners.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Will I receive a certificate?
+
+                </h3>
+
+                <p>
+
+                    Yes. Every student who successfully completes
+                    the course receives a certificate.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Are projects included?
+
+                </h3>
+
+                <p>
+
+                    Yes. Students work on practical projects
+                    throughout the training program.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    How are classes conducted?
+
+                </h3>
+
+                <p>
+
+                    Live online classes through Google Meet
+                    with mentor support.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FINAL CTA -->
+    <!-- ========================= -->
+
+    <section class="final-cta">
+
+        <div class="cta-box">
+
+            <span>
+
+                LIMITED SEATS AVAILABLE
+
+            </span>
+
+            <h2>
+
+                Ready To Begin Your Tech Journey?
+
+            </h2>
+
+            <p>
+
+                Join the next Python Programming batch
+                and start building skills that matter.
+
+            </p>
+
+            <a href="#"
+                class="btn-primary">
+
+                Secure Your Seat
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-column">
+
+                <h3>
+
+                    SYNERGY
+
+                </h3>
+
+                <p>
+
+                    Learn • Build • Grow
+
+                </p>
+
+                <p>
+
+                    Practical technology education
+                    for ambitious students.
+
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Quick Links
+
+                </h4>
+
+                <a href="/">Home</a>
+
+                <a href="/courses">Courses</a>
+
+                <a href="/register">Register</a>
+
+                <a href="/contact">Contact</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Programs
+
+                </h4>
+
+                <a href="#">Python Programming</a>
+
+                <a href="#">SQL Mastery</a>
+
+                <a href="#">Data Analysis</a>
+
+                <a href="#">Machine Learning</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Features
+
+                </h4>
+
+                <p>Live Classes</p>
+
+                <p>Projects</p>
+
+                <p>Certificates</p>
+
+                <p>Career Support</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 SYNERGY. All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
 
 </body>
+
 </html>

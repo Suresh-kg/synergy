@@ -1,13 +1,16 @@
 
 from flask import (
     Flask,
+    flash,
     render_template,
     request,
     redirect,
     session,
-    send_file
+    send_file,
+    url_for
 )
 
+import os
 import sqlite3
 import pandas as pd
 from email_sender import send_welcome_email
@@ -17,6 +20,11 @@ from flask import send_file
 from flask import Flask
 
 from datetime import datetime
+from email_contact import send_contact_email
+
+from certificate_generator import (
+    generate_certificate
+)
 
 
 app = Flask(__name__)
@@ -26,22 +34,64 @@ app.secret_key = "synergy_secret_key_2026"
 def home_page():
     return render_template('home.html')
 
+@app.route('/register')
+def register_page():
+    return render_template('register.html')
 
-@app.route('/register', methods=['POST'])
+
+@app.route('/register_submit', methods=['POST'])
 def register():
-
+    ...
     name = request.form['name']
     email = request.form['email']
     college = request.form['college']
     phone = request.form['phone']
+    year = request.form['year']
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
+    # Check duplicate email first
+    cursor.execute(
+        "SELECT id FROM students WHERE email=?",
+        (email,)
+    )
+
+    existing = cursor.fetchone()
+
+    if existing:
+
+        conn.close()
+
+        return """
+        <h2>Email already registered.</h2>
+        <a href='/register'>Go Back</a>
+        """
+
+    # Insert student
     cursor.execute("""
-    INSERT INTO students(name,email,college,phone)
-    VALUES(?,?,?,?)
-    """,(name,email,college,phone))
+    INSERT INTO students(
+        name,
+        email,
+        college,
+        phone,
+        year,
+        course,
+        fee_amount
+    )
+    VALUES(?,?,?,?,?,?,?)
+    """,
+    (
+        name,
+        email,
+        college,
+        phone,
+        year,
+        "Python Programming",
+        299
+    ))
+
+    student_id = cursor.lastrowid
 
     conn.commit()
     conn.close()
@@ -53,12 +103,14 @@ def register():
     except Exception as e:
         print("Email Error:", e)
 
-    return """
-    <h1>Registration Successful!</h1>
-    <a href="/">Go Back</a>
-    """
+    return redirect(
+        url_for(
+            'payment',
+            student_id=student_id
+        )
+    )
     
-@app.route('/admin')
+@app.route('/synergy_dashboard_8x92_admin')
 def admin():
 
     if not session.get('admin'):
@@ -134,7 +186,7 @@ def admin():
     conn.close()
 
     return render_template(
-        'admin.html',
+        'synergy_dashboard_8x92_admin.html',
         students=students,
         search=search,
         total_students=total_students,
@@ -159,7 +211,37 @@ def delete_student(id):
     conn.commit()
     conn.close()
 
-    return redirect('/admin')   
+    return redirect('/synergy_dashboard_8x92_admin')   
+
+def get_setting(key):
+
+    import sqlite3
+
+    BASE_DIR = os.path.dirname(
+        os.path.abspath(__file__)
+    )
+
+    DB_PATH = os.path.join(
+        BASE_DIR,
+        "database.db"
+    )
+
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT value FROM settings WHERE key=?",
+        (key,)
+    )
+
+    result = cursor.fetchone()
+
+    conn.close()
+
+    if result:
+        return result[0]
+
+    return None
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -173,9 +255,12 @@ def login():
 
             session['admin'] = True
 
-            return redirect('/admin')
+            return redirect('/synergy_dashboard_8x92_admin')
 
-        return "Invalid Login"
+        return render_template(
+                "login.html",
+                error="Invalid usernma or Password"
+            )
 
     return render_template('login.html')
 
@@ -186,7 +271,39 @@ def logout():
 
     return redirect('/login')
 
+@app.route('/login_submit', methods=['POST'])
+def login_submit():
+
+    username = request.form['username']
+    password = request.form['password']
+
+    admin_user = get_setting(
+        "ADMIN_USERNAME"
+    )
+
+    admin_pass = get_setting(
+        "ADMIN_PASSWORD"
+    )
     
+    print("Entered Username:", username)
+    print("Entered Password:", password)
+
+    print("DB Username:", admin_user)
+    print("DB Password:", admin_pass)
+
+    if (
+        username == admin_user
+        and password == admin_pass
+    ):
+        session['admin'] = True
+
+        return redirect('/synergy_dashboard_8x92_admin')
+
+    return render_template(
+        "login.html",
+        error="Invalid User or Password"
+    )
+
 @app.route('/export')
 def export_students():
 
@@ -217,71 +334,49 @@ def export_students():
         "students.xlsx",
         as_attachment=True
     )
-  
-@app.route('/certificate/<int:id>')
-def generate_certificate(id):
+@app.route(
+    '/certificate/<int:id>'
+)
+def certificate(id):
 
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(
+        'database.db'
+    )
+
     cursor = conn.cursor()
 
-    cursor.execute(
-        "SELECT name FROM students WHERE id=?",
-        (id,)
-    )
+    cursor.execute("""
+    SELECT
+        name,
+        payment_status
+    FROM students
+    WHERE id=?
+    """, (id,))
 
     student = cursor.fetchone()
 
     conn.close()
 
     if not student:
+
         return "Student not found"
 
-    student_name = student[0]
+    if student[1] != "Paid":
 
-    file_name = f"{student_name}_certificate.pdf"
+        return """
+        <h2>
+        Certificate available only
+        for paid students.
+        </h2>
+        """
 
-    pdf = canvas.Canvas(file_name)
-
-    pdf.setFont("Helvetica-Bold", 24)
-
-    pdf.drawCentredString(
-        300,
-        750,
-        "CERTIFICATE OF COMPLETION"
+    file_path = generate_certificate(
+        student[0],
+        id
     )
-
-    pdf.setFont("Helvetica", 16)
-
-    pdf.drawCentredString(
-        300,
-        650,
-        "This certificate is awarded to"
-    )
-
-    pdf.setFont("Helvetica-Bold", 20)
-
-    pdf.drawCentredString(
-        300,
-        600,
-        student_name
-    )
-
-    pdf.drawCentredString(
-        300,
-        550,
-        "For successfully completing"
-    )
-
-    pdf.drawCentredString(
-        300,
-        520,
-        "Python Programming Course"
-    )
-
-    pdf.save()
 
     return send_file(
-        file_name,
+        file_path,
         as_attachment=True
     )
 
@@ -307,7 +402,7 @@ def mark_paid(id):
     conn.commit()
     conn.close()
 
-    return redirect('/admin')
+    return redirect('/synergy_dashboard_8x92_admin')
 
 
 
@@ -320,46 +415,82 @@ def courses():
 def contact():
     return render_template('contact.html')
 
-@app.route('/payment/<int:id>')
-def payment(id):
+
+@app.route('/payment/<int:student_id>')
+def payment(student_id):
 
     return render_template(
         'payment.html',
-        student_id=id
+        student_id=student_id
     )
-
+    
 @app.route('/submit_payment/<int:id>', methods=['POST'])
 def submit_payment(id):
 
-    utr = request.form['utr']
+    utr = request.form.get('utr', '').strip()
+
+    if not utr:
+        flash("Please enter a valid UTR/Transaction ID.", "danger")
+        return redirect(f"/payment/{id}")
 
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
 
     cursor.execute("""
+    SELECT id
+    FROM students
+    WHERE utr=? AND id != ?
+    """, (utr, id))
+
+    existing = cursor.fetchone()
+
+    payment_date = datetime.now().strftime("%d-%m-%Y %H:%M")
+
+    cursor.execute("""
         UPDATE students
-        SET utr=?,
-            payment_status='Pending Verification'
+        SET payment_status='Paid',
+            payment_date=?
         WHERE id=?
+    """, (payment_date, id))
+    
+    if existing:
+
+        conn.close()
+
+        return """
+        <h2 style='color:red;'>
+        UTR Already Exists
+        </h2>
+
+        <p>
+        This transaction ID has already been submitted.
+        Please check your UTR number.
+        </p>
+
+        <a href='javascript:history.back()'>
+        Go Back
+        </a>
+        """
+
+    cursor.execute("""
+    UPDATE students
+    SET utr=?,
+        payment_status='Pending Verification'
+    WHERE id=?
     """, (utr, id))
 
     conn.commit()
     conn.close()
 
-    return """
-    <h2>
-    Payment Details Submitted Successfully
-    </h2>
+    return redirect(url_for('success', id=id))
 
-    <p>
-    Your payment is awaiting verification.
-    </p>
-
-    <a href='/'>
-        Return Home
-    </a>
-    """
-
+@app.route('/success/<int:id>')
+def success(id):
+    return render_template(
+        'success.html',
+        student_id=id
+    )
+    
 @app.route('/verify_payment/<int:id>')
 def verify_payment(id):
 
@@ -378,7 +509,113 @@ def verify_payment(id):
     conn.commit()
     conn.close()
 
-    return redirect('/admin')
+    return redirect('/synergy_dashboard_8x92_admin')
 
+
+@app.route('/contact_submit', methods=['POST'])
+def contact_submit():
+
+    print("CONTACT FORM HIT")
+
+    name = request.form['name']
+    email = request.form['email']
+    subject = request.form['subject']
+    message = request.form['message']
+
+    conn = sqlite3.connect(
+        'database.db'
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+    INSERT INTO contact_messages(
+        name,
+        email,
+        subject,
+        message
+    )
+    VALUES(?,?,?,?)
+    """,
+    (
+        name,
+        email,
+        subject,
+        message
+    ))
+    
+    
+    conn.commit()
+    conn.close()
+
+    try:
+
+        send_contact_email(
+            name,
+            email,
+            subject,
+            message
+        )
+
+    except Exception as e:
+
+        print(
+            "Contact Email Error:",
+            e
+        )
+
+    return render_template(
+    'contact_success.html'
+)
+    
+@app.route('/messages')
+def messages():
+
+    conn = sqlite3.connect(
+        'database.db'
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM contact_messages
+        ORDER BY id DESC
+    """)
+
+    messages = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        'messages.html',
+        messages=messages
+    )
+
+@app.route('/delete_message/<int:id>')
+def delete_message(id):
+
+    conn = sqlite3.connect(
+        'database.db'
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM contact_messages WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/messages')
+
+
+
+    
+    
+    
+    
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,883 @@
+/* ===================================
+   SYNERGY PAYMENT & SUCCESS PAGE
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#020617;
+    color:white;
+    overflow-x:hidden;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+:root{
+
+    --primary:#2563eb;
+    --secondary:#3b82f6;
+    --accent:#38bdf8;
+
+    --dark:#020617;
+    --card:#0f172a;
+
+    --text:#e2e8f0;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    padding:20px 8%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    backdrop-filter:blur(15px);
+
+    background:
+    rgba(2,6,23,.85);
+
+    border-bottom:
+    1px solid rgba(255,255,255,.05);
+
+    z-index:1000;
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:24px;
+
+    font-weight:700;
+}
+
+.logo img{
+
+    width:45px;
+}
+
+/* ===========================
+   COMMON
+=========================== */
+
+section{
+
+    padding:100px 8%;
+}
+
+.section-header{
+
+    text-align:center;
+
+    margin-bottom:70px;
+}
+
+.section-header span{
+
+    color:var(--accent);
+
+    font-weight:600;
+
+    letter-spacing:2px;
+}
+
+.section-header h2{
+
+    font-size:3rem;
+
+    margin-top:15px;
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.payment-hero,
+.success-hero{
+
+    min-height:70vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:150px 8% 100px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+    135deg,
+    #020617,
+    #0f172a,
+    #1e3a8a
+    );
+}
+
+.hero-content,
+.success-card{
+
+    max-width:900px;
+
+    position:relative;
+
+    z-index:5;
+}
+
+.hero-badge,
+.success-badge{
+
+    display:inline-block;
+
+    padding:12px 25px;
+
+    border-radius:50px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    margin-bottom:25px;
+}
+
+.payment-hero h1,
+.success-card h1{
+
+    font-size:
+    clamp(3rem,7vw,5rem);
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+
+    font-weight:800;
+}
+
+.payment-hero h1 span,
+.success-card h1 span{
+
+    display:block;
+
+    color:var(--accent);
+}
+
+.payment-hero p,
+.success-card p{
+
+    color:#cbd5e1;
+
+    max-width:700px;
+
+    margin:auto;
+}
+
+/* ===========================
+   BLOBS
+=========================== */
+
+.blob{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.35;
+}
+
+.blob1{
+
+    width:350px;
+    height:350px;
+
+    background:#2563eb;
+
+    left:-100px;
+    top:-100px;
+}
+
+.blob2{
+
+    width:400px;
+    height:400px;
+
+    background:#38bdf8;
+
+    right:-100px;
+    top:100px;
+}
+
+.blob3{
+
+    width:350px;
+    height:350px;
+
+    background:#3b82f6;
+
+    bottom:-100px;
+    left:40%;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.btn-primary{
+
+    display:inline-block;
+
+    padding:16px 34px;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-weight:600;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--primary),
+    var(--accent)
+    );
+
+    transition:.3s;
+}
+
+.btn-primary:hover{
+
+    transform:
+    translateY(-5px);
+}
+
+.btn-secondary{
+
+    display:inline-block;
+
+    padding:16px 34px;
+
+    border-radius:14px;
+
+    color:white;
+
+    border:
+    2px solid rgba(255,255,255,.2);
+
+    transition:.3s;
+}
+
+.btn-secondary:hover{
+
+    background:white;
+
+    color:#020617;
+}
+
+/* ===========================
+   PAYMENT SECTION
+=========================== */
+
+.payment-wrapper{
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:40px;
+}
+
+.course-card{
+
+    background:
+    linear-gradient(
+    135deg,
+    rgba(37,99,235,.15),
+    rgba(56,189,248,.08)
+    );
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    padding:50px;
+
+    border-radius:30px;
+}
+
+.course-tag{
+
+    display:inline-block;
+
+    padding:8px 15px;
+
+    background:#2563eb;
+
+    border-radius:50px;
+
+    margin-bottom:20px;
+}
+
+.price{
+
+    font-size:3rem;
+
+    color:var(--accent);
+
+    font-weight:700;
+
+    margin:25px 0;
+}
+
+.course-card ul{
+
+    list-style:none;
+}
+
+.course-card li{
+
+    margin-bottom:15px;
+}
+
+.payment-card{
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:30px;
+
+    padding:50px;
+}
+
+.payment-card h2{
+
+    margin-bottom:10px;
+}
+
+.payment-card p{
+
+    color:#94a3b8;
+
+    margin-bottom:25px;
+}
+
+.qr-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+}
+
+.qr-card img{
+
+    width:250px;
+
+    margin:auto;
+}
+
+.upi-box{
+
+    margin-bottom:25px;
+}
+
+.upi-box label{
+
+    display:block;
+
+    margin-bottom:10px;
+}
+
+.upi-id{
+
+    background:#0f172a;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    word-break:break-all;
+}
+
+.payment-card form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+}
+
+.payment-card input{
+
+    padding:16px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:14px;
+
+    background:#0f172a;
+
+    color:white;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+}
+
+.payment-card button{
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    color:white;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--primary),
+    var(--accent)
+    );
+}
+
+/* ===========================
+   TRUST SECTION
+=========================== */
+
+.trust-section{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+}
+
+.trust-card{
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    text-align:center;
+}
+
+/* ===========================
+   FLOW SECTION
+=========================== */
+
+.flow-grid,
+.steps-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+}
+
+.flow-card,
+.step-card{
+
+    background:#0f172a;
+
+    border-radius:24px;
+
+    padding:35px;
+
+    text-align:center;
+}
+
+.number,
+.step-number{
+
+    font-size:50px;
+
+    color:var(--accent);
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+/* ===========================
+   FAQ
+=========================== */
+
+.faq-container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+}
+
+.faq-item{
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:25px;
+}
+
+.faq-item h3{
+
+    margin-bottom:10px;
+}
+
+/* ===========================
+   SUPPORT
+=========================== */
+
+.support-card,
+.community-card{
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:30px;
+
+    padding:60px;
+
+    text-align:center;
+}
+
+.support-icon,
+.community-icon{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+}
+
+/* ===========================
+   SUCCESS PAGE
+=========================== */
+
+.success-icon{
+
+    font-size:90px;
+
+    margin-bottom:20px;
+
+    animation:pulse 2s infinite;
+}
+
+.status-box{
+
+    margin-top:30px;
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:25px;
+}
+
+.status-box span{
+
+    display:block;
+
+    color:#94a3b8;
+
+    margin-bottom:8px;
+}
+
+.status-box strong{
+
+    color:#38bdf8;
+
+    font-size:1.2rem;
+}
+
+.success-stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+}
+
+.stat-card{
+
+    background:
+    rgba(255,255,255,.05);
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    text-align:center;
+}
+
+.stat-card h2{
+
+    font-size:3rem;
+
+    color:var(--accent);
+}
+
+/* ===========================
+   CTA
+=========================== */
+
+.cta-box{
+
+    background:
+    linear-gradient(
+    135deg,
+    #1e3a8a,
+    #2563eb
+    );
+
+    border-radius:30px;
+
+    text-align:center;
+
+    padding:80px 40px;
+}
+
+.cta-box span{
+
+    color:#bfdbfe;
+}
+
+.cta-box h2{
+
+    font-size:3rem;
+
+    margin:15px 0;
+}
+
+.cta-box p{
+
+    max-width:700px;
+
+    margin:auto auto 30px;
+}
+
+.cta-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer{
+
+    background:#01040f;
+
+    padding:80px 8% 30px;
+}
+
+.footer-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:40px;
+}
+
+.footer-column h3,
+.footer-column h4{
+
+    margin-bottom:20px;
+}
+
+.footer-column a{
+
+    display:block;
+
+    color:#94a3b8;
+
+    margin-bottom:12px;
+}
+
+.footer-column p{
+
+    color:#94a3b8;
+
+    margin-bottom:10px;
+}
+
+.footer-bottom{
+
+    margin-top:50px;
+
+    border-top:
+    1px solid rgba(255,255,255,.08);
+
+    padding-top:25px;
+
+    text-align:center;
+
+    color:#94a3b8;
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes pulse{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:992px){
+
+    .payment-wrapper{
+
+        grid-template-columns:1fr;
+    }
+
+    .course-card,
+    .payment-card{
+
+        padding:35px;
+    }
+}
+
+@media(max-width:768px){
+
+    section{
+
+        padding:80px 5%;
+    }
+
+    .section-header h2{
+
+        font-size:2.2rem;
+    }
+
+    .cta-box h2{
+
+        font-size:2rem;
+    }
+
+    .support-card,
+    .community-card{
+
+        padding:40px 25px;
+    }
+
+    .qr-card img{
+
+        width:200px;
+    }
+}

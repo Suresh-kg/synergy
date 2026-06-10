@@ -3,9 +3,10 @@ import sqlite3
 conn = sqlite3.connect("database.db")
 cursor = conn.cursor()
 
-cursor.execute("PRAGMA table_info(students)")
+cursor.execute("""
+SELECT * FROM settings;
+""")
 
-for col in cursor.fetchall():
-    print(col)
+print(cursor.fetchall())
 
 conn.close()

@@ -1,75 +1,648 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 
-    <title>Payment - Synergy</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Complete Payment | SYNERGY
+    </title>
 
     <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/main.css') }}">
+        href="{{ url_for('static',
+        filename='css/payment.css') }}">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
 </head>
 
 <body>
 
-<nav>
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
 
-    <div class="logo-container">
+    <nav class="navbar">
 
-        <img src="{{ url_for('static',
-        filename='images/logo.png') }}">
+        <div class="logo">
 
-        <span>SYNERGY</span>
+            <img src="{{ url_for('static',
+            filename='images/logo.png') }}"
+            alt="SYNERGY">
 
-    </div>
+            <span>
+                SYNERGY
+            </span>
 
-</nav>
+        </div>
 
-<div class="register-container">
+    </nav>
 
-    <h1>Complete Payment</h1>
+    <!-- ========================= -->
+    <!-- HERO -->
+    <!-- ========================= -->
 
-    <br>
+    <section class="payment-hero">
 
-    <h3>Course: Python Programming</h3>
+        <div class="blob blob1"></div>
 
-    <h2>Fee: ₹299</h2>
+        <div class="blob blob2"></div>
 
-    <br>
+        <div class="blob blob3"></div>
 
-    <img
-    src="{{ url_for('static',
-    filename='images/qr.png') }}"
-    width="250">
+        <div class="hero-content">
 
-    <br><br>
+            <div class="hero-badge">
 
-    <h3>UPI ID</h3>
+                🔒 Secure Enrollment Process
 
-    <p>
-        synergy@oksbi
-    </p>
+            </div>
 
-    <br>
+            <h1>
 
-    <form
-    action="/submit_payment/{{ student_id }}"
-    method="POST">
+                Complete Your
 
-        <input
-        type="text"
-        name="utr"
-        placeholder="Enter UTR / Transaction ID"
-        required>
+                <span>Course Enrollment</span>
 
-        <button type="submit">
+            </h1>
 
-            Submit Payment Details
+            <p>
 
-        </button>
+                You're one step away from joining
+                the Python Programming Bootcamp.
 
-    </form>
+            </p>
 
-</div>
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- PAYMENT SECTION -->
+    <!-- ========================= -->
+
+    <section class="payment-section">
+
+        <div class="payment-wrapper">
+
+            <!-- LEFT SIDE -->
+
+            <div class="course-card">
+
+                <div class="course-tag">
+
+                    MOST POPULAR
+
+                </div>
+
+                <h2>
+
+                    🐍 Python Programming
+
+                </h2>
+
+                <p>
+
+                    Beginner to project-level training
+                    with live mentorship and certification.
+
+                </p>
+
+                <div class="price">
+
+                    ₹299
+
+                </div>
+
+                <ul>
+
+                    <li>✓ Live Interactive Classes</li>
+
+                    <li>✓ Real Projects</li>
+
+                    <li>✓ Certificate Included</li>
+
+                    <li>✓ WhatsApp Community</li>
+
+                    <li>✓ Career Guidance</li>
+
+                    <li>✓ Mentor Support</li>
+
+                </ul>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+
+            <div class="payment-card">
+
+                <h2>
+
+                    Scan & Pay
+
+                </h2>
+
+                <p>
+
+                    Complete payment using any UPI app.
+
+                </p>
+
+                <div class="qr-card">
+
+                    <img
+                    src="{{ url_for('static',
+                    filename='images/qr.png') }}"
+                    alt="QR Code">
+
+                </div>
+
+                <div class="upi-box">
+
+                    <label>
+
+                        UPI ID
+
+                    </label>
+
+                    <div class="upi-id">
+
+                        saravanakumar2546tamil@okicici
+
+                    </div>
+
+                </div>
+
+                <form
+                action="/submit_payment/{{ student_id }}"
+                method="POST">
+
+                    <input
+                    type="text"
+                    name="utr"
+                    placeholder="Enter UTR / Transaction ID"
+                    required>
+
+                    <button type="submit">
+
+                        Submit Payment
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- TRUST SECTION -->
+    <!-- ========================= -->
+
+    <section class="trust-section">
+
+        <div class="trust-card">
+
+            <h3>
+
+                🔐 Secure Verification
+
+            </h3>
+
+            <p>
+
+                Every payment is manually verified
+                before activation.
+
+            </p>
+
+        </div>
+
+        <div class="trust-card">
+
+            <h3>
+
+                ⚡ Fast Confirmation
+
+            </h3>
+
+            <p>
+
+                Payment verification is typically
+                completed within a short time.
+
+            </p>
+
+        </div>
+
+        <div class="trust-card">
+
+            <h3>
+
+                🎓 Guaranteed Access
+
+            </h3>
+
+            <p>
+
+                Once verified, you gain access to
+                classes and community resources.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- PAYMENT FLOW -->
+    <!-- ========================= -->
+
+    <section class="payment-flow">
+
+        <div class="section-header">
+
+            <span>
+
+                ENROLLMENT PROCESS
+
+            </span>
+
+            <h2>
+
+                What Happens Next?
+
+            </h2>
+
+        </div>
+
+        <div class="flow-grid">
+
+            <div class="flow-card">
+
+                <div class="number">
+                    01
+                </div>
+
+                <h3>
+                    Pay
+                </h3>
+
+                <p>
+
+                    Complete payment using
+                    the QR code.
+
+                </p>
+
+            </div>
+
+            <div class="flow-card">
+
+                <div class="number">
+                    02
+                </div>
+
+                <h3>
+                    Submit UTR
+                </h3>
+
+                <p>
+
+                    Enter transaction details
+                    for verification.
+
+                </p>
+
+            </div>
+
+            <div class="flow-card">
+
+                <div class="number">
+                    03
+                </div>
+
+                <h3>
+                    Verification
+                </h3>
+
+                <p>
+
+                    Admin verifies payment.
+
+                </p>
+
+            </div>
+
+            <div class="flow-card">
+
+                <div class="number">
+                    04
+                </div>
+
+                <h3>
+                    Start Learning
+                </h3>
+
+                <p>
+
+                    Join classes and begin
+                    your learning journey.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FAQ SECTION -->
+    <!-- ========================= -->
+
+    <section class="faq-section">
+
+        <div class="section-header">
+
+            <span>
+
+                PAYMENT FAQ
+
+            </span>
+
+            <h2>
+
+                Frequently Asked Questions
+
+            </h2>
+
+        </div>
+
+        <div class="faq-container">
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Is the payment secure?
+
+                </h3>
+
+                <p>
+
+                    Yes. Payments are made directly
+                    through your preferred UPI application.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    What is a UTR Number?
+
+                </h3>
+
+                <p>
+
+                    UTR (Unique Transaction Reference)
+                    is generated after successful payment.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    How long does verification take?
+
+                </h3>
+
+                <p>
+
+                    Verification is usually completed
+                    within a short period after submission.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    What if I enter the wrong UTR?
+
+                </h3>
+
+                <p>
+
+                    Contact support immediately so
+                    the payment can be verified manually.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- SUPPORT SECTION -->
+    <!-- ========================= -->
+
+    <section class="support-section">
+
+        <div class="support-card">
+
+            <div class="support-icon">
+
+                💬
+
+            </div>
+
+            <h2>
+
+                Need Help With Payment?
+
+            </h2>
+
+            <p>
+
+                If you experience any issue during payment,
+                contact the SYNERGY support team.
+
+            </p>
+
+            <a href="/contact"
+                class="btn-secondary">
+
+                Contact Support
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CTA SECTION -->
+    <!-- ========================= -->
+
+    <section class="payment-cta">
+
+        <div class="cta-box">
+
+            <span>
+
+                COMPLETE YOUR ENROLLMENT
+
+            </span>
+
+            <h2>
+
+                Your Learning Journey Starts Here
+
+            </h2>
+
+            <p>
+
+                Finish payment verification and gain
+                access to live classes, projects,
+                certificates and mentorship.
+
+            </p>
+
+            <a href="#"
+                class="btn-primary">
+
+                Submit UTR Above
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-column">
+
+                <h3>
+
+                    SYNERGY
+
+                </h3>
+
+                <p>
+
+                    Learn • Build • Grow
+
+                </p>
+
+                <p>
+
+                    Practical technology education
+                    for future professionals.
+
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Quick Links
+
+                </h4>
+
+                <a href="/">Home</a>
+
+                <a href="/courses">Courses</a>
+
+                <a href="/register">Register</a>
+
+                <a href="/contact">Contact</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Programs
+
+                </h4>
+
+                <a href="#">Python Programming</a>
+
+                <a href="#">SQL Mastery</a>
+
+                <a href="#">Data Analysis</a>
+
+                <a href="#">Machine Learning</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Features
+
+                </h4>
+
+                <p>Live Classes</p>
+
+                <p>Projects</p>
+
+                <p>Certificates</p>
+
+                <p>Career Support</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 SYNERGY. All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
 
 </body>
+
 </html>

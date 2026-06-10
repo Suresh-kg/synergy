@@ -79,10 +79,11 @@
 
         
         <ul>
-            <li><a href="/admin">📊 Dashboard</a></li>
-            <li><a href="/students">👨‍🎓 Students</a></li>
-            <li><a href="/export">📥 Export Excel</a></li>
+            <li><a href="//synergy_dashboard_8x92_admin">📊 Dashboard</a></li>
+            <li><a href="//synergy_dashboard_8x92_admin">👨‍🎓 Students</a></li>
+            <li><a href="/export">📁 Export Excel</a></li>
             <li><a href="/logout">🚪 Logout</a></li>
+            <li><a href="/messages">📩 Messages</a></li>
         </ul>
 
     </aside>
@@ -180,6 +181,9 @@
                         <th>Status</th>
                         <th>Payment Date</th>
                         <th>Action</th>
+                        <th>certificate</th>
+                        <th>Delete</th>
+                        <th>Transtion id</th>
                     </tr>
                 </thead>
 
@@ -234,7 +238,7 @@
                         <td>
                             <a class="btn-success"
                                href="/certificate/{{ student[0] }}">
-                               Generate
+                               Certificate
                             </a>
                         </td>
 
@@ -246,6 +250,9 @@
                             </a>
                         </td>
                         <td>{{ student[8] }}</td>
+
+
+
                     </tr>
                     {% endfor %}
 

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Contact Messages | SYNERGY Admin
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static',
+        filename='css/contact_admin.css') }}">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="admin-header">
+
+        <div class="admin-title">
+
+            <h1>
+                Contact Messages
+            </h1>
+
+            <p>
+                Manage student enquiries and support requests.
+            </p>
+
+        </div>
+
+        <div class="admin-actions">
+
+            <a href="/admin"
+                class="admin-btn">
+
+                Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+
+            <h2>
+                {{ messages|length }}
+            </h2>
+
+            <p>
+                Total Messages
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2>
+                📩
+            </h2>
+
+            <p>
+                Inbox
+            </p>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2>
+                ⚡
+            </h2>
+
+            <p>
+                Quick Response
+            </p>
+
+        </div>
+
+    </div>
+
+    {% if messages %}
+
+    <div class="table-card">
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Subject</th>
+
+                        <th>Message</th>
+
+                        <th>Date</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for message in messages %}
+
+                    <tr>
+
+                        <td>
+                            {{ message.id }}
+                        </td>
+
+                        <td>
+                            {{ message.name }}
+                        </td>
+
+                        <td>
+                            {{ message.email }}
+                        </td>
+
+                        <td>
+                            {{ message.subject }}
+                        </td>
+
+                        <td class="message-cell">
+                            {{ message.message }}
+                        </td>
+
+                        <td>
+                            {{ message.created_at }}
+                        </td>
+
+                        <td>
+
+                            <a href="/delete_message/{{ message.id }}"
+                                class="delete-btn"
+                                onclick="return confirm('Delete this message?')">
+
+                                Delete
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="table-card">
+
+        <div class="empty-state">
+
+            <h2>
+                No Messages Yet
+            </h2>
+
+            <p>
+                Contact enquiries will appear here.
+            </p>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</body>
+
+</html>

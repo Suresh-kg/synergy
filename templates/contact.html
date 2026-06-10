@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Contact Us | SYNERGY
+    </title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static',
+        filename='css/contact.css') }}">
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <img src="{{ url_for('static',
+            filename='images/logo.png') }}"
+            alt="SYNERGY">
+
+            <span>
+                SYNERGY
+            </span>
+
+        </div>
+
+        <ul class="nav-links">
+
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/courses">Courses</a></li>
+
+            <li><a href="/register">Register</a></li>
+
+            <li><a href="/contact">Contact</a></li>
+
+        </ul>
+
+        <div class="nav-actions">
+
+            <a href="/login"
+                class="login-btn">
+
+                Login
+
+            </a>
+
+            <a href="/register"
+                class="join-btn">
+
+                Join Now
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================= -->
+    <!-- HERO -->
+    <!-- ========================= -->
+
+    <section class="contact-hero">
+
+        <div class="blob blob1"></div>
+
+        <div class="blob blob2"></div>
+
+        <div class="blob blob3"></div>
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+
+                💬 We're Here To Help
+
+            </div>
+
+            <h1>
+
+                Let's Start A
+
+                <span>Conversation</span>
+
+            </h1>
+
+            <p>
+
+                Have questions about our courses,
+                enrollment process or career guidance?
+                We'd love to hear from you.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CONTACT CARDS -->
+    <!-- ========================= -->
+
+    <section class="contact-cards">
+
+        <div class="info-card">
+
+            <div class="icon">
+
+                📧
+
+            </div>
+
+            <h3>
+
+                Email Support
+
+            </h3>
+
+            <p>
+
+                synergytech.edu@gmail.com
+
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <div class="icon">
+
+                📱
+
+            </div>
+
+            <h3>
+
+                WhatsApp
+
+            </h3>
+
+            <p>
+
+                +91 7339108896
+
+                <br>
+
+                +91 7904900115
+
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <div class="icon">
+
+                📍
+
+            </div>
+
+            <h3>
+
+                Location
+
+            </h3>
+
+            <p>
+
+                Coimbatore,
+                Tamil Nadu
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CONTACT SECTION -->
+    <!-- ========================= -->
+
+    <section class="contact-section">
+
+        <div class="contact-wrapper">
+
+            <!-- LEFT -->
+
+            <div class="contact-left">
+
+                <div class="section-badge">
+
+                    GET IN TOUCH
+
+                </div>
+
+                <h2>
+
+                    Let's Discuss Your Learning Journey
+
+                </h2>
+
+                <p>
+
+                    Whether you're a student,
+                    beginner or career switcher,
+                    our team is ready to help.
+
+                </p>
+
+                <div class="contact-benefits">
+
+                    <div class="benefit">
+
+                        ✓ Course Guidance
+
+                    </div>
+
+                    <div class="benefit">
+
+                        ✓ Career Advice
+
+                    </div>
+
+                    <div class="benefit">
+
+                        ✓ Enrollment Support
+
+                    </div>
+
+                    <div class="benefit">
+
+                        ✓ Community Access
+
+                    </div>
+
+                </div>
+
+                <a
+                href="https://chat.whatsapp.com/If5ibkmNxOY4D8pNI0ces2"
+                target="_blank"
+                class="btn-primary">
+
+                    Join WhatsApp Community
+
+                </a>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="contact-form-card">
+
+                <h2>
+
+                    Send A Message
+
+                </h2>
+
+                <p>
+
+                    Fill in the form below and
+                    we'll get back to you soon.
+
+                </p>
+
+                <form
+                action="/contact_submit"
+                method="POST">
+
+                    <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    required>
+
+                    <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    required>
+
+                    <input
+                    type="text"
+                    name="subject"
+                    placeholder="Subject"
+                    required>
+
+                    <textarea
+                    name="message"
+                    rows="6"
+                    placeholder="Write your message..."
+                    required></textarea>
+
+                    <button type="submit">
+
+                        Send Message
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FAQ SECTION -->
+    <!-- ========================= -->
+
+    <section class="faq-section">
+
+        <div class="section-header">
+
+            <span>
+
+                FREQUENTLY ASKED QUESTIONS
+
+            </span>
+
+            <h2>
+
+                Questions We Often Receive
+
+            </h2>
+
+            <p>
+
+                Quick answers to common questions about SYNERGY.
+
+            </p>
+
+        </div>
+
+        <div class="faq-container">
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Do I need programming experience?
+
+                </h3>
+
+                <p>
+
+                    No. Our Python Bootcamp is designed
+                    specifically for beginners.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Are classes conducted live?
+
+                </h3>
+
+                <p>
+
+                    Yes. Classes are conducted live
+                    through Google Meet with mentor support.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Will I receive a certificate?
+
+                </h3>
+
+                <p>
+
+                    Yes. Students receive a certificate
+                    after successful completion.
+
+                </p>
+
+            </div>
+
+            <div class="faq-item">
+
+                <h3>
+
+                    Do you provide career guidance?
+
+                </h3>
+
+                <p>
+
+                    Yes. We help with resumes,
+                    interview preparation and career growth.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- RESPONSE TIMELINE -->
+    <!-- ========================= -->
+
+    <section class="timeline-section">
+
+        <div class="section-header">
+
+            <span>
+
+                RESPONSE PROCESS
+
+            </span>
+
+            <h2>
+
+                What Happens After You Contact Us?
+
+            </h2>
+
+        </div>
+
+        <div class="timeline-grid">
+
+            <div class="timeline-card">
+
+                <div class="timeline-number">
+
+                    01
+
+                </div>
+
+                <h3>
+
+                    Message Received
+
+                </h3>
+
+                <p>
+
+                    Your enquiry reaches our team.
+
+                </p>
+
+            </div>
+
+            <div class="timeline-card">
+
+                <div class="timeline-number">
+
+                    02
+
+                </div>
+
+                <h3>
+
+                    Review
+
+                </h3>
+
+                <p>
+
+                    We review your questions and requirements.
+
+                </p>
+
+            </div>
+
+            <div class="timeline-card">
+
+                <div class="timeline-number">
+
+                    03
+
+                </div>
+
+                <h3>
+
+                    Response
+
+                </h3>
+
+                <p>
+
+                    We contact you through email
+                    or WhatsApp.
+
+                </p>
+
+            </div>
+
+            <div class="timeline-card">
+
+                <div class="timeline-number">
+
+                    04
+
+                </div>
+
+                <h3>
+
+                    Guidance
+
+                </h3>
+
+                <p>
+
+                    Receive personalized learning guidance.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- COMMUNITY CTA -->
+    <!-- ========================= -->
+
+    <section class="community-section">
+
+        <div class="community-card">
+
+            <div class="community-icon">
+
+                🚀
+
+            </div>
+
+            <span>
+
+                JOIN THE COMMUNITY
+
+            </span>
+
+            <h2>
+
+                Connect With Future Developers
+
+            </h2>
+
+            <p>
+
+                Join our WhatsApp community to receive
+                updates, assignments, announcements,
+                and learning resources.
+
+            </p>
+
+            <a
+            href="https://chat.whatsapp.com/If5ibkmNxOY4D8pNI0ces2"
+            target="_blank"
+            class="btn-primary">
+
+                Join WhatsApp Community
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FINAL CTA -->
+    <!-- ========================= -->
+
+    <section class="contact-cta">
+
+        <div class="cta-box">
+
+            <span>
+
+                START YOUR TECH JOURNEY
+
+            </span>
+
+            <h2>
+
+                Learn. Build. Grow.
+
+            </h2>
+
+            <p>
+
+                Join SYNERGY and gain practical skills
+                through live mentorship, projects,
+                certificates and career support.
+
+            </p>
+
+            <div class="cta-buttons">
+
+                <a href="/register"
+                    class="btn-primary">
+
+                    Register Now
+
+                </a>
+
+                <a href="/courses"
+                    class="btn-secondary">
+
+                    Explore Courses
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-grid">
+
+            <div class="footer-column">
+
+                <h3>
+
+                    SYNERGY
+
+                </h3>
+
+                <p>
+
+                    Learn • Build • Grow
+
+                </p>
+
+                <p>
+
+                    Empowering students through
+                    practical technology education.
+
+                </p>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Quick Links
+
+                </h4>
+
+                <a href="/">Home</a>
+
+                <a href="/courses">Courses</a>
+
+                <a href="/register">Register</a>
+
+                <a href="/contact">Contact</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Programs
+
+                </h4>
+
+                <a href="#">Python Programming</a>
+
+                <a href="#">SQL Mastery</a>
+
+                <a href="#">Data Analysis</a>
+
+                <a href="#">Machine Learning</a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h4>
+
+                    Contact
+
+                </h4>
+
+                <p>synergytech.edu@gmail.com</p>
+
+                <p>+91 7339108896</p>
+
+                <p>+91 7904900115</p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 SYNERGY. All Rights Reserved.
+
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
