@@ -10,7 +10,7 @@ INSERT INTO settings VALUES
 
 cursor.execute("""
 INSERT INTO settings VALUES
-('APP_PASSWORD','ecup chox yuuw nefx')
+('APP_PASSWORD','')
 """)
 
 cursor.execute("""
@@ -20,7 +20,7 @@ INSERT INTO settings VALUES
 
 cursor.execute("""
 INSERT INTO settings VALUES
-('ADMIN_PASSWORD','1234')
+('ADMIN_PASSWORD','')
 """)
 
 conn.commit()   # IMPORTANT
