@@ -312,6 +312,17 @@ def delete_student(id):
 def register_page():
     return render_template('register.html')
 
+@app.route('/test_email')
+def test_email():
+
+    send_welcome_email(
+        "Suresh",
+        "suresh2004krishna@gmail.com"
+    )
+
+    return "Email Sent"
+    
+
 @app.route('/register_submit', methods=['POST'])
 def register():
 
