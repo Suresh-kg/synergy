@@ -498,56 +498,58 @@ def contact_submit():
 
     print("CONTACT FORM HIT")
 
-    name = request.form['name']
-    email = request.form['email']
-    subject = request.form['subject']
-    message = request.form['message']
-
-    conn = sqlite3.connect(
-        'database.db'
-    )
-
-    cursor = conn.cursor()
-
-    cursor.execute("""
-    INSERT INTO contact_messages(
-        name,
-        email,
-        subject,
-        message
-    )
-    VALUES(?,?,?,?)
-    """,
-    (
-        name,
-        email,
-        subject,
-        message
-    ))
-    
-    
-    conn.commit()
-    conn.close()
-
     try:
 
-        send_contact_email(
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        INSERT INTO contact_messages(
             name,
             email,
             subject,
             message
         )
+        VALUES(?,?,?,?)
+        """,
+        (
+            name,
+            email,
+            subject,
+            message
+        ))
+
+        conn.commit()
+        conn.close()
+
+        print("Contact message saved successfully")
+
+        # EMAIL DISABLED FOR RENDER
+        # send_contact_email(
+        #     name,
+        #     email,
+        #     subject,
+        #     message
+        # )
+
+        return render_template(
+            'contact_success.html'
+        )
 
     except Exception as e:
 
-        print(
-            "Contact Email Error:",
-            e
-        )
+        print("CONTACT ERROR:", e)
 
-    return render_template(
-    'contact_success.html'
-)
+        return f"""
+        <h2>Contact Form Error</h2>
+        <p>{e}</p>
+        <a href="/contact">Go Back</a>
+        """, 500
     
 @app.route('/messages')
 def messages():
