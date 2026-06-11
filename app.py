@@ -315,27 +315,39 @@ def register_page():
 @app.route('/register_submit', methods=['POST'])
 def register():
 
-    print("STEP 1")
+    try:
 
-    name = request.form['name']
-    email = request.form['email']
+        print("STEP 1")
 
-    print("STEP 2")
+        name = request.form['name']
+        email = request.form['email']
+        college = request.form['college']
+        phone = request.form['phone']
+        year = request.form['year']
 
-    conn = sqlite3.connect('database.db')
+        print("STEP 2")
 
-    print("STEP 3")
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
 
-    cursor = conn.cursor()
+        print("STEP 3")
 
-    print("STEP 4")
+        cursor.execute(
+            "SELECT id FROM students WHERE email=?",
+            (email,)
+        )
 
-    cursor.execute(
-        "SELECT id FROM students WHERE email=?",
-        (email,)
-    )
+        print("STEP 4")
 
-    print("STEP 5")
+        existing = cursor.fetchone()
+
+        print("STEP 5")
+
+        # rest of your code...
+
+    except Exception as e:
+        print("REGISTER ERROR:", e)
+        return str(e), 500
 
 
 @app.route('/payment/<int:student_id>')
