@@ -1,63 +1,47 @@
 from os import name
 from email.mime.text import MIMEText
-import sqlite3
+from xmlrpc import server
+
+from httpcore import request
+
+from httpcore import request
+from loder import get_env
 import smtplib
 
-def get_setting(key):
 
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
 
-    cursor.execute(
-        "SELECT value FROM settings WHERE key=?",
-        (key,)
-    )
+EMAIL = get_env("MAIL_USERNAME")
+    
+APP_PASSWORD = get_env("MAIL_PASSWORD")
 
-    result = cursor.fetchone()
 
-    conn.close()
-
-    if result:
-        return result[0]
-
-    return None
-
-EMAIL = get_setting(
-    "EMAIL"
-)
-
-APP_PASSWORD = get_setting(
-    "APP_PASSWORD"
-)
-print("EMAIL:", EMAIL)
-print("APP_PASSWORD:", APP_PASSWORD)
 
 def send_welcome_email(student_name, student_email):
 
     subject = "Welcome to Synergy Python Course"
     body = f"""
-Hello {student_name},
+            Hello {student_name},
 
-Welcome to Synergy!
+            Welcome to Synergy!
 
-Your registration has been successfully completed.
+            Your registration has been successfully completed.
 
-What you will receive:
-✅ Live Python Classes
-✅ Weekly Assignments
-✅ Hands-on Projects
-✅ Certificate of Completion
+            What you will receive:
+            ✅ Live Python Classes
+            ✅ Daily Assignments
+            ✅ Hands-on Projects
+            ✅ Certificate of Completion
 
-We will contact you soon with:
-- Course Schedule
-- Google Meet Link
-- WhatsApp Community Link
+            We will contact you soon with:
+            - Course Schedule
+            - Google Meet Link
+            - WhatsApp Community Link
 
-Thank you for choosing Synergy.
+            Thank you for choosing Synergy.
 
-Regards,
-Synergy Team
-"""
+            Regards,
+            Synergy Team
+            """
 
     msg = MIMEText(body)
     msg['Subject'] = subject
@@ -66,8 +50,6 @@ Synergy Team
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    print("EMAIL:", EMAIL)
-    print("APP_PASSWORD length:", len(APP_PASSWORD))
     server.login(EMAIL, APP_PASSWORD)
 
     server.send_message(msg)
@@ -76,12 +58,10 @@ Synergy Team
     
 if __name__ == "__main__":
     
-    name = "Suresh"
-    email = "suresh2004krishna@gmail.com"
-    
-    try:
-        send_welcome_email(name, email)
-        print("Email sent successfully")
+    student_name = request.form["name"]
+    student_email = request.form["email"]
 
-    except Exception as e:
-        print("Email Error:", e)
+    send_welcome_email(
+        student_name,
+        student_email
+    )

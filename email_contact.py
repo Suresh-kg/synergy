@@ -1,35 +1,9 @@
 import smtplib
-
 from email.mime.text import MIMEText
+from loder import get_env
 
-
-import sqlite3
-
-def get_setting(key):
-
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    cursor.execute(
-        "SELECT value FROM settings WHERE key=?",
-        (key,)
-    )
-    result = cursor.fetchone()
-
-    conn.close()
-
-    if result:
-        return result[0]
-
-    return None
-
-EMAIL = get_setting(
-    "EMAIL"
-)
-
-APP_PASSWORD = get_setting(
-    "APP_PASSWORD"
-)
+EMAIL = get_env("MAIL_USERNAME")
+APP_PASSWORD = get_env("MAIL_PASSWORD")
 
 def send_contact_email(
     name,

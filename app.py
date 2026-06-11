@@ -16,8 +16,6 @@ import pandas as pd
 from email_sender import send_welcome_email
 
 from reportlab.pdfgen import canvas
-from flask import send_file
-from flask import Flask
 
 from datetime import datetime
 from email_contact import send_contact_email
@@ -26,6 +24,7 @@ from certificate_generator import (
     generate_certificate
 )
 
+from loder import get_env
 
 app = Flask(__name__)
 app.secret_key = "synergy_secret_key_2026"
@@ -34,81 +33,7 @@ app.secret_key = "synergy_secret_key_2026"
 def home_page():
     return render_template('home.html')
 
-@app.route('/register')
-def register_page():
-    return render_template('register.html')
-
-
-@app.route('/register_submit', methods=['POST'])
-def register():
-    ...
-    name = request.form['name']
-    email = request.form['email']
-    college = request.form['college']
-    phone = request.form['phone']
-    year = request.form['year']
-
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    # Check duplicate email first
-    cursor.execute(
-        "SELECT id FROM students WHERE email=?",
-        (email,)
-    )
-
-    existing = cursor.fetchone()
-
-    if existing:
-
-        conn.close()
-
-        return """
-        <h2>Email already registered.</h2>
-        <a href='/register'>Go Back</a>
-        """
-
-    # Insert student
-    cursor.execute("""
-    INSERT INTO students(
-        name,
-        email,
-        college,
-        phone,
-        year,
-        course,
-        fee_amount
-    )
-    VALUES(?,?,?,?,?,?,?)
-    """,
-    (
-        name,
-        email,
-        college,
-        phone,
-        year,
-        "Python Programming",
-        299
-    ))
-
-    student_id = cursor.lastrowid
-
-    conn.commit()
-    conn.close()
-
-    try:
-        send_welcome_email(name, email)
-        print("Welcome email sent")
-
-    except Exception as e:
-        print("Email Error:", e)
-
-    return redirect(
-        url_for(
-            'payment',
-            student_id=student_id
-        )
-    )
+# /// Admin Dashboard route ///
     
 @app.route('/synergy_dashboard_8x92_admin')
 def admin():
@@ -196,52 +121,8 @@ def admin():
         pending_verification=pending_verification
 
     )
-
-@app.route('/delete/<int:id>')
-def delete_student(id):
-
-    conn = sqlite3.connect('database.db')
-    cursor = conn.cursor()
-
-    cursor.execute(
-        "DELETE FROM students WHERE id=?",
-        (id,)
-    )
-
-    conn.commit()
-    conn.close()
-
-    return redirect('/synergy_dashboard_8x92_admin')   
-
-def get_setting(key):
-
-    import sqlite3
-
-    BASE_DIR = os.path.dirname(
-        os.path.abspath(__file__)
-    )
-
-    DB_PATH = os.path.join(
-        BASE_DIR,
-        "database.db"
-    )
-
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-
-    cursor.execute(
-        "SELECT value FROM settings WHERE key=?",
-        (key,)
-    )
-
-    result = cursor.fetchone()
-
-    conn.close()
-
-    if result:
-        return result[0]
-
-    return None
+    
+#$ Login and Logout routes
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -277,24 +158,14 @@ def login_submit():
     username = request.form['username']
     password = request.form['password']
 
-    admin_user = get_setting(
-        "ADMIN_USERNAME"
-    )
-
-    admin_pass = get_setting(
-        "ADMIN_PASSWORD"
-    )
-    
-    print("Entered Username:", username)
-    print("Entered Password:", password)
-
-    print("DB Username:", admin_user)
-    print("DB Password:", admin_pass)
+    admin_user = get_env("ADMIN_USERNAME")
+    admin_pass = get_env("ADMIN_PASSWORD")
 
     if (
         username == admin_user
         and password == admin_pass
     ):
+
         session['admin'] = True
 
         return redirect('/synergy_dashboard_8x92_admin')
@@ -303,7 +174,17 @@ def login_submit():
         "login.html",
         error="Invalid User or Password"
     )
+    
+@app.route('/env-test')
+def env_test():
 
+    return {
+        "admin": get_env("ADMIN_USERNAME"),
+        "secret": get_env("SECRET_KEY"),
+        "mail": get_env("MAIL_USERNAME")
+    }
+
+# Export route to download students data as Excel file
 @app.route('/export')
 def export_students():
 
@@ -334,6 +215,8 @@ def export_students():
         "students.xlsx",
         as_attachment=True
     )
+    
+# Certificate route to generate and download course completion certificate
 @app.route(
     '/certificate/<int:id>'
 )
@@ -380,7 +263,7 @@ def certificate(id):
         as_attachment=True
     )
 
-
+# Mark payment as paid (Admin action)
 @app.route('/mark_paid/<int:id>')
 def mark_paid(id):
 
@@ -404,16 +287,102 @@ def mark_paid(id):
 
     return redirect('/synergy_dashboard_8x92_admin')
 
+# Delete student record (Admin action)
+@app.route('/delete/<int:id>')
+def delete_student(id):
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM students WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect('/synergy_dashboard_8x92_admin')   
 
 
-@app.route('/courses')
-def courses():
-    return render_template('courses.html')
+    
+# /// Register route for adding new student ///
+
+@app.route('/register')
+def register_page():
+    return render_template('register.html')
 
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+@app.route('/register_submit', methods=['POST'])
+def register():
+    ...
+    name = request.form['name']
+    email = request.form['email']
+    college = request.form['college']
+    phone = request.form['phone']
+    year = request.form['year']
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    # Check duplicate email first
+    cursor.execute(
+        "SELECT id FROM students WHERE email=?",
+        (email,)
+    )
+
+    existing = cursor.fetchone()
+
+    if existing:
+
+        conn.close()
+
+        return """
+        <h2>Email already registered.</h2>
+        <a href='/register'>Go Back</a>
+        """
+
+    # Insert student
+    cursor.execute("""
+    INSERT INTO students(
+        name,
+        email,
+        college,
+        phone,
+        year,
+        course,
+        fee_amount
+    )
+    VALUES(?,?,?,?,?,?,?)
+    """,
+    (
+        name,
+        email,
+        college,
+        phone,
+        year,
+        "Python Programming",
+        299
+    ))
+
+    student_id = cursor.lastrowid
+
+    conn.commit()
+    conn.close()
+
+    try:
+        send_welcome_email(name, email)
+        print("Welcome email sent")
+
+    except Exception as e:
+        print("Email Error:", e)
+
+    return redirect(
+        url_for(
+            'payment',
+            student_id=student_id
+        )
+    )
 
 
 @app.route('/payment/<int:student_id>')
@@ -511,6 +480,13 @@ def verify_payment(id):
 
     return redirect('/synergy_dashboard_8x92_admin')
 
+
+
+# /// Contact form routes ///
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 @app.route('/contact_submit', methods=['POST'])
 def contact_submit():
@@ -612,8 +588,12 @@ def delete_message(id):
     return redirect('/messages')
 
 
+# /// Courses route ///
 
-    
+@app.route('/courses')
+def courses():
+    return render_template('courses.html')
+
     
     
     
