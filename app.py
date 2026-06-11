@@ -371,12 +371,7 @@ def register():
         conn.commit()
         conn.close()
 
-        try:
-            send_welcome_email(name, email)
-            print("Welcome email sent")
-
-        except Exception as e:
-            print("Email Error:", e)
+        print("Email sending disabled")
 
         return redirect(
             url_for(
