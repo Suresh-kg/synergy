@@ -312,77 +312,30 @@ def delete_student(id):
 def register_page():
     return render_template('register.html')
 
-
 @app.route('/register_submit', methods=['POST'])
 def register():
-    ...
+
+    print("STEP 1")
+
     name = request.form['name']
     email = request.form['email']
-    college = request.form['college']
-    phone = request.form['phone']
-    year = request.form['year']
+
+    print("STEP 2")
 
     conn = sqlite3.connect('database.db')
+
+    print("STEP 3")
+
     cursor = conn.cursor()
 
-    # Check duplicate email first
+    print("STEP 4")
+
     cursor.execute(
         "SELECT id FROM students WHERE email=?",
         (email,)
     )
 
-    existing = cursor.fetchone()
-
-    if existing:
-
-        conn.close()
-
-        return """
-        <h2>Email already registered.</h2>
-        <a href='/register'>Go Back</a>
-        """
-
-    # Insert student
-    cursor.execute("""
-    INSERT INTO students(
-        name,
-        email,
-        college,
-        phone,
-        year,
-        course,
-        fee_amount
-    )
-    VALUES(?,?,?,?,?,?,?)
-    """,
-    (
-        name,
-        email,
-        college,
-        phone,
-        year,
-        "Python Programming",
-        299
-    ))
-
-    student_id = cursor.lastrowid
-
-    conn.commit()
-    conn.close()
-
-    try:
-        send_welcome_email(name, email)
-        print("Welcome email sent")
-
-    except Exception as e:
-        print("Email Error:", e)
-
-    return redirect(
-        url_for(
-            'payment',
-            student_id=student_id
-        )
-    )
+    print("STEP 5")
 
 
 @app.route('/payment/<int:student_id>')
